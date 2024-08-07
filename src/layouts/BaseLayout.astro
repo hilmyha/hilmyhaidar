@@ -1,0 +1,26 @@
+---
+import Head from "./Head.astro";
+import Header from "../components/Header.astro";
+
+const {
+  title = "WhodareuuDev",
+  description = "Build faster websites with less client-side Javascript",
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <Head {title} {description} />
+  <body class="min-h-screen flex flex-col bg-slate-800">
+    <Header />
+
+    <div class="flex-grow container px-4 lg:px-6 border max-w-screen-xl">
+      <slot />
+    </div>
+
+    <script
+      is:inline
+      src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.8.0/flowbite.min.js"
+    ></script>
+  </body>
+</html>
