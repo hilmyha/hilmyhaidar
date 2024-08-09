@@ -17,7 +17,7 @@ const { frontmatter } = Astro.props;
         <ion-icon name="chevron-back-outline"></ion-icon>
         <span> Back to posts </span>
       </a>
-      <h1 class="mb-1 text-4xl font-medium text-white w-2/3">
+      <h1 class="mb-1 lg:text-4xl text-3xl font-medium text-white w-2/3">
         {frontmatter.title}
       </h1>
       <p class="text-base font-light text-slate-200 w-2/3">
@@ -33,9 +33,19 @@ const { frontmatter } = Astro.props;
   <!-- posts -->
   <section class="container max-w-screen-lg lg:px-20 px-6 pt-16 pb-48">
     <div
-      class="mt-8 text-base text-slate-700 leading-5 prose-slate prose-a:text-slate-600 hover:prose-a:text-slate-800 prose-p:text-justify lg:prose-img:w-full prose-img:w-full prose lg:prose-md min-w-full"
+      class="mt-8 text-base font-[350] text-slate-700 leading-5 prose-slate prose-a:text-slate-600 hover:prose-a:text-slate-800 prose-p:text-justify lg:prose-img:w-full prose-img:w-full prose lg:prose-md min-w-full"
     >
       <slot />
     </div>
   </section>
+
+  <!-- back to top button -->
+  <a
+    href="#"
+    class="fixed bottom-6 right-6 p-4 rounded-full bg-slate-500 text-white shadow-xl"
+  >
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+      <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 15.75 7.5-7.5 7.5 7.5" />
+    </svg>
+  </a>
 </BlogLayout>

@@ -16,7 +16,7 @@ const posts = await getCollection("posts", ({ data }) => {
         Blog
       </p>
       <h1 class="mb-2 text-4xl font-medium text-white">
-        Haidar's writings 📝
+        Haidar's writings
       </h1>
       <p class="text-lg font-light text-slate-200 lg:w-2/3">
         <a href="/" class="font-bold underline mr-1">
@@ -30,7 +30,7 @@ const posts = await getCollection("posts", ({ data }) => {
 
   </div>
   <!-- posts -->
-  <section class="container max-w-screen-lg lg:px-20 px-6">
+  <section class="container max-w-screen-lg lg:px-20 px-6 pb-32">
     <div class="grid grid-cols-1">
       {posts.map((post) => (
         <PostList post={post} />

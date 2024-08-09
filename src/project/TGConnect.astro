@@ -1,31 +1,29 @@
 ---
 import GithubButton from "../components/GithubButton.astro";
 const data = {
-  cardColor: "bg-gradient-to-br from-red-600/70 via-slate-800 to-slate-800",
+  cardColor: "bg-gradient-to-br from-[#4E6E81]/80 via-slate-800 to-slate-800",
 
-  title: "Yuhdolan",
-  description: "A Travel and Tourism Website 🌏",
-  repo: "https://github.com/hilmyha/yuhdolanpwt",
+  title: "TG Connect",
+  description: "A monitoring and data collection system 📊",
+  repo: "https://github.com/hilmyha/tg-connect-v2",
   descriptions: [
-    "a travel and tourism information website that provides a variety of travel destinations and tourism information. It also provides a platform for users to share their travel experiences and reviews.",
-    "This project is a personal project on my campus. I made to learn more about Laravel and Tailwind CSS. I also made this project to help people who want to travel to find information about tourist attractions and culinary in Indonesia.",
+    "a monitoring and data collection system that provides a variety of data collection and monitoring information. It also provides a platform for users to share their reporting and information.",
+    "This project is a final project on my campus. I made to learn more about React Native and Laravel REST API. I also made this project to help people who want to monitoring, sharing a report and information.",
+    "This app still in development, my plan is to merge this server with Express.js.",
   ],
-  features: [
-    "Search destinations and culinary",
-    "Reviewing the destination",
-    "Make some article",
-  ],
+  features: ["Monitoring data", "Collecting data", "Sharing report"],
   devicons: [
+    "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/react/react-original.svg",
     "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/laravel/laravel-original.svg",
-    "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/tailwindcss/tailwindcss-original.svg",
-    "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/mysql/mysql-original-wordmark.svg",
   ],
   images: [
-    "project-img/yuhdolan/yuhdolanregister.png",
-    "project-img/yuhdolan/yuhdolanlogin.png",
-    "project-img/yuhdolan/yuhdolanhome.png",
-    "project-img/yuhdolan/yuhdolandashboard.png",
-    "project-img/yuhdolan/yuhdolancreate.png",
+    "project-img/tgconnect/register.png",
+    "project-img/tgconnect/login.png",
+    "project-img/tgconnect/home.png",
+    "project-img/tgconnect/informasi.png",
+    "project-img/tgconnect/laporan.png",
+    "project-img/tgconnect/panicbutton.png",
+    "project-img/tgconnect/admin.png",
   ],
 };
 ---
@@ -38,8 +36,7 @@ const data = {
   <h3 class="mb-8">
     <span class="lg:text-4xl text-2xl font-bold text-white">
       {data.title}
-    </span>
-    <span class="lg:text-lg text-sm font-medium text-slate-300">
+    </span><span class="lg:text-lg text-sm font-medium text-slate-300">
       - {data.description}
     </span>
   </h3>
@@ -55,11 +52,11 @@ const data = {
     {
       data.images.map((image, index) => (
         // buat agar image bisa di swipe
-        <div class="snap-center lg:p-3 p-2 bg-red-700 shadow-xl rounded-2xl flex-none w-auto h-auto">
+        <div class="snap-center lg:p-3 p-2 bg-slate-400/30 shadow-xl rounded-2xl flex-none w-auto h-auto">
           <img
             src={image}
             alt="project-image"
-            class="object-cover lg:w-[720px] w-[500px] h-full rounded-lg"
+            class="object-cover lg:h-[420px] h-[300px] w-full rounded-lg"
           />
         </div>
       ))
@@ -68,6 +65,9 @@ const data = {
 
   <p class="lg:text-lg text-white my-8">
     {data.descriptions[1]}
+  </p>
+  <p class="lg:text-lg underline text-white my-8">
+    {data.descriptions[2]}
   </p>
 
   <h4 class="lg:text-2xl text-lg text-white font-semibold">Features</h4>

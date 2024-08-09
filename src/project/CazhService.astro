@@ -40,7 +40,7 @@ const data = {
     <span class="lg:text-4xl text-2xl font-bold text-white">
       {data.title}
     </span>
-    <span class="lg:text-2xl text-lg font-medium text-slate-300">
+    <span class="lg:text-lg text-sm font-medium text-slate-300">
       - {data.description}
     </span>
   </h3>
@@ -79,7 +79,7 @@ const data = {
     {data.features.map((feature) => <li>{feature}</li>)}
   </ul>
 
-  <!-- <LiveProductionButton name={data.title} link="https://service-old.cazh.id" /> -->
+  <LiveProductionButton name={data.title} link="https://service-old.cazh.id" />
   <GithubButton name={data.title} repo={data.repo} />
 
   <h4 class="mt-12 lg:text-2xl text-lg text-white font-semibold">

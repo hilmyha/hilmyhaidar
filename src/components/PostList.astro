@@ -23,6 +23,9 @@ const { author, title, category, date, description } = post.data;
     <p class="mt-1 font-light text-sm lg:block hidden tracking-tight w-3/4">
       {description.split(" ").slice(0, 15).join(" ")}... <span class="text-slate-400">Read more</span>
     </p>
+    <p class="mt-1 lg:hidden font-light text-sm block tracking-tight w-3/4">
+      {description.split(" ").slice(0, 5).join(" ")}... <span class="text-slate-400">Read more</span>
+    </p>
   </div>
   <div>
     <p class="text-slate-400 font-light text-sm text-nowrap">
