@@ -1,0 +1,80 @@
+---
+const data = {
+  id: "experience",
+  title: "🎓 Experience",
+  description: "Experience that I have ever done.",
+  experience: [
+    {
+      title: "Laboratory teaching assistant",
+      company: "Institut Teknologi Telkom Purwokerto",
+      date: "2021 - 2022",
+      description:
+        "Teaching assistant for the course of Algorithm and Programming",
+      certificate: "certificate/alpro-certificate.png",
+    },
+    {
+      title: "Laboratory teaching assistant",
+      company: "Institut Teknologi Telkom Purwokerto",
+      date: "2022 - 2023",
+      description:
+        "Teaching assistant for the course of Database Management System.",
+      certificate: "certificate/basdat-certificate.png",
+    },
+    {
+      title: "Software Engineer Intern",
+      company: "CAZH.id",
+      date: "Jul 2023 - Sep 2023",
+      description:
+        "Developing a web-based application for the company's internal use.",
+      certificate: "certificate/intern-certificate.png",
+    },
+  ],
+};
+---
+
+<section
+  id={data.id}
+  class="px-4 lg:px-6 lg:py-32 py-24 container max-w-screen-xl"
+>
+  <h2 class="lg:mb-10 mb-8 lg:text-6xl text-4xl font-extrabold text-white">
+    {data.title}
+  </h2>
+  <p class="text-slate-400 lg:text-2xl text-xl">
+    {data.description}
+  </p>
+
+  <!-- experience -->
+  <div
+    class="mt-32 delay-[20ms] duration-[600ms] [animation-iteration-count:infinite] taos:translate-y-[200px] taos:opacity-0"
+  >
+    <ol class="relative lg:ml-10 ml-6 border-s-2 border-slate-700">
+      {
+        data.experience.map((experience) => (
+          <li class="ms-4 my-10">
+            <div class="absolute w-5 h-5 bg-slate-500 rounded-full mt-0.5 -start-[11px] border border-slate-500" />
+            <time class="mb-1 font-normal leading-none text-slate-400">
+              {experience.date}
+            </time>
+            <h3 class="mt-4 lg:text-4xl text-2xl font-semibold text-slate-100">
+              {experience.title}
+            </h3>
+            <p class="lg:text-lg text-sm underline font-normal text-teal-500">
+              {experience.company}
+            </p>
+            <p class="lg:text-2xl text-lg font-normal text-slate-500">
+              {experience.description}
+            </p>
+
+            <div class="mt-3 rounded-lg overflow-hidden w-[300px] p-2 bg-slate-700">
+              <img
+                class="w-full h-full rounded-md"
+                src={experience.certificate}
+                alt=""
+              />
+            </div>
+          </li>
+        ))
+      }
+    </ol>
+  </div>
+</section>

@@ -1,0 +1,112 @@
+---
+import GithubButton from "../components/GithubButton.astro";
+import LiveProductionButton from "../components/LiveProductionButton.astro";
+const data = {
+  cardColor: "bg-gradient-to-br from-slate-600/70 via-slate-800 to-slate-800",
+
+  title: "Cazh Service",
+  description: "An app to manage employee tasks 📝",
+  repo: "https://github.com/CazhID/service-app",
+  descriptions: [
+    "Cazh Service is an application to manage employee tasks. This application has features to manage tasks, services, roles, and users.",
+    "This project is a internship project. I made to learn more about Laravel and Tailwind CSS. I also made this project to help people who want to manage their employee tasks.",
+    "You can see the live production of this project by clicking the button below. and login with, username 'admin' and password 'admin123'",
+  ],
+  features: ["Manage tasks", "Manage services", "Manage roles", "Manage users"],
+  devicons: [
+    "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/laravel/laravel-original.svg",
+    "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/livewire/livewire-original.svg",
+    "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/tailwindcss/tailwindcss-original.svg",
+    "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/mariadb/mariadb-original-wordmark.svg",
+  ],
+  images: [
+    "project-img/cazhservice/dashboard.png",
+    "project-img/cazhservice/task.png",
+    "project-img/cazhservice/tasklist.png",
+    "project-img/cazhservice/services.png",
+    "project-img/cazhservice/roles.png",
+    "project-img/cazhservice/user.png",
+    "project-img/cazhservice/profile.png",
+  ],
+};
+---
+
+<!-- Card Section -->
+<div
+  class=`lg:py-32 lg:px-16 px-8 py-20 lg:rounded-[64px] rounded-3xl lg:mt-20 mt-10 delay-[20ms] duration-[600ms] [animation-iteration-count:infinite] taos:translate-y-[200px] taos:opacity-0 ${data.cardColor}`
+  data-taos-offset="300"
+>
+  <h3 class="mb-8">
+    <span class="lg:text-4xl text-2xl font-bold text-white">
+      {data.title}
+    </span>
+    <span class="lg:text-2xl text-lg font-medium text-slate-300">
+      - {data.description}
+    </span>
+  </h3>
+  <p class="lg:text-lg text-white mb-8">
+    <span class="font-bold">Intoducing {data.title} -</span>
+    {data.descriptions[0]}
+  </p>
+
+  <!-- Card Content -->
+  <div
+    class="flex snap-mandatory snap-x gap-6 my-2 lg:my-4 bg-blue overflow-x-scroll no-scrollbar"
+  >
+    {
+      data.images.map((image, index) => (
+        // buat agar image bisa di swipe
+        <div class="snap-center lg:p-3 p-2 bg-slate-600 shadow-xl rounded-2xl flex-none w-auto h-auto">
+          <img
+            src={image}
+            alt="project-image"
+            class="object-cover lg:w-[720px] w-[500px] h-full rounded-lg"
+          />
+        </div>
+      ))
+    }
+  </div>
+
+  <p class="lg:text-lg text-white my-8">
+    {data.descriptions[1]}
+  </p>
+  <p class="lg:text-lg text-white my-8">
+    {data.descriptions[2]}
+  </p>
+
+  <h4 class="lg:text-2xl text-lg text-white font-semibold">Features</h4>
+  <ul class="lg:text-lg text-white list-disc pl-6 mt-4">
+    {data.features.map((feature) => <li>{feature}</li>)}
+  </ul>
+
+  <LiveProductionButton name={data.title} link="https://service-old.cazh.id" />
+  <GithubButton name={data.title} repo={data.repo} />
+
+  <h4 class="mt-12 lg:text-2xl text-lg text-white font-semibold">
+    Featured technology used
+  </h4>
+
+  <div class="flex gap-10 lg:mt-12 mt-8">
+    {
+      data.devicons.map((devicon) => (
+        <img class="lg:h-20 h-16 my-0" src={devicon} />
+      ))
+    }
+  </div>
+</div>
+
+<style>
+  /* Hide scrollbar for Chrome, Safari and Opera */
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  /* Hide scrollbar for IE, Edge and Firefox */
+  .no-scrollbar {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+  }
+
+  ion-icon {
+    font-size: 42px;
+  }
+</style>

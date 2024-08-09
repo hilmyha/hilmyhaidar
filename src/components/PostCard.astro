@@ -1,0 +1,25 @@
+---
+import { getEntry, type CollectionEntry } from "astro:content";
+
+type Props = {
+  post: CollectionEntry<"posts">;
+};
+
+const { post } = Astro.props;
+const { author, title, category, date, description } = post.data;
+---
+
+<a
+  href={`/posts/${post.slug}`}
+  class="delay-[20ms] duration-[600ms] [animation-iteration-count:infinite] taos:translate-y-[200px] taos:opacity-0 lg:p-16 p-6 bg-gradient-to-br from-slate-900 via-transparent to-transparent hover:bg-gradient-to-tl transition-all rounded-3xl"
+>
+  <p class="text-teal-400 font-light capitalize text-xl">
+    {category}
+  </p>
+  <h2 class="mt-4 lg:text-3xl text-2xl font-medium tracking-tight text-white">
+    {title}
+  </h2>
+  <!-- <p class="font-light text-white">
+    {description}
+  </p> -->
+</a>

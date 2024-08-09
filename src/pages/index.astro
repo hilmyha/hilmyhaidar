@@ -1,6 +1,17 @@
 ---
-import BaseLayout from "../layouts/BaseLayout.astro"
+import BaseLayout from "../layouts/BaseLayout.astro";
+import HeroSection from "../sections/HeroSection.astro";
+import ProjectSection from "../sections/ProjectSection.astro";
+import ExperienceSection from "../sections/ExperienceSection.astro";
+import LatestWritingSection from "../sections/LatestWritingSection.astro";
 ---
+
 <BaseLayout>
-	<p>Testt</p>
+  <HeroSection />
+
+  <main>
+    <ProjectSection />
+    <ExperienceSection />
+    <LatestWritingSection />
+  </main>
 </BaseLayout>

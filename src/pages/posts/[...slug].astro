@@ -1,0 +1,27 @@
+---
+import { getCollection, getEntry, type CollectionEntry } from "astro:content";
+import BlogPost from "../../layouts/BlogPost.astro";
+import { Image } from "astro:assets";
+
+const { slug } = Astro.params;
+
+export async function getStaticPaths() {
+  const posts = await getCollection("posts");
+  return posts.map((entry) => ({
+    params: { slug: entry.slug },
+    props: { entry },
+  }));
+}
+
+type Props = {
+  entry: CollectionEntry<"posts">;
+};
+
+const { entry } = Astro.props;
+const { Content } = await entry.render();
+const { data: authorData } = await getEntry("teams", entry.data.author.id);
+---
+
+<BlogPost frontmatter={entry.data}>
+  <Content />
+</BlogPost>

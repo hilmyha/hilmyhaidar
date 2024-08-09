@@ -1,0 +1,23 @@
+---
+const { name, link } = Astro.props;
+---
+
+<!-- github button -->
+<a href={link} class="mt-6 p-4 rounded-xl shadow-xl bg-slate-500 flex justify-between text-white lg:w-[350px]">
+  <div class="flex flex-col gap-3">
+    <div class="flex items-center gap-2">
+      <span class="relative flex h-3 w-3">
+        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-500 opacity-75"></span>
+        <span class="relative inline-flex rounded-full h-3 w-3 bg-cyan-500"></span>
+      </span>
+      <h5 class="lg:text-lg font-semibold text-cyan-500">Live Production</h5>
+    </div>
+    <p class="text-2xl -mt-3 font-bold text-slate-300">
+      <!-- split https:// -->
+      {link.split("https://")[1]}
+    </p>
+  </div>
+  <div class="bg-slate-400 px-2 pt-2 rounded-lg h-fit shadow-xl">
+    <ion-icon size="small" name="return-down-forward-outline"></ion-icon>
+  </div>
+</a>

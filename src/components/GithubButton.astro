@@ -1,0 +1,13 @@
+---
+const { name, repo } = Astro.props;
+---
+
+<!-- github button -->
+<a href={repo} class="m-6 flex flex-col gap-2 text-white w-fit">
+  <h5 class="lg:text-2xl font-semibold -mb-2">{name}</h5>
+  <div class="flex gap-2 items-center">
+    <span>on</span>
+    <ion-icon name="logo-github"></ion-icon>
+    <span>github.com</span>
+  </div>
+</a>

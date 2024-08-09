@@ -1,0 +1,37 @@
+---
+const data = {
+  id: "latest-writing",
+  title: "✒️ Latest Writing",
+  description: "I write about the web, programming, and sometimes my life.",
+};
+
+import PostCard from "../components/PostCard.astro";
+
+import { getCollection } from "astro:content";
+
+const posts = await getCollection("posts", ({ data }) => {
+  return data.draft !== true;
+});
+---
+
+<section
+  id={data.id}
+  class="px-4 lg:px-6 lg:py-32 py-24 container max-w-screen-xl"
+>
+  <h2 class="lg:mb-10 mb-8 lg:text-6xl text-4xl font-extrabold text-white">
+    {data.title}
+  </h2>
+  <p class="text-slate-400 lg:text-2xl text-xl">
+    {data.description}
+  </p>
+
+  <!-- latest writing -->
+  <div class="lg:px-10 lg:mt-32 mt-20 grid lg:grid-cols-2 grid-cols-1 gap-10">
+    {
+      posts
+        .reverse()
+        .slice(0, 3)
+        .map((p) => <PostCard post={p} />)
+    }
+  </div>
+</section>

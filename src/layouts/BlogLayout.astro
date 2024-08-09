@@ -1,6 +1,5 @@
 ---
 import Head from "./Head.astro";
-import Header from "../components/Header.astro";
 
 const {
   title = "Whodareuu Dev - Full Stack Developer 👨‍💻",
@@ -9,10 +8,9 @@ const {
 ---
 
 <!doctype html>
-<html lang="en" class="scroll-smooth font-poppins">
+<html lang="en" class="scroll-smooth font-rubik">
   <Head {title} {description} />
-  <body class="min-h-screen flex flex-col bg-slate-800">
-    <Header />
+  <body class="min-h-screen flex flex-col bg-slate-50">
 
     <div class="flex-grow">
       <slot />

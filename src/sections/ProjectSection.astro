@@ -1,0 +1,26 @@
+---
+const data = {
+  id: "project",
+  title: "📚 Highlighted Project",
+  description:
+    "I've worked on a small range of projects, Here are a few of my favorites.",
+};
+import Yuhdolan from "../project/Yuhdolan.astro";
+import CazhService from "../project/CazhService.astro";
+---
+
+<section
+  id={data.id}
+  class="px-4 lg:px-6 lg:pb-32 lg:pt-52 pb-24 pt-32 container max-w-screen-xl"
+>
+  <h2 class="lg:mb-10 mb-8 lg:text-6xl text-4xl font-extrabold text-white">
+    {data.title}
+  </h2>
+  <p class="text-slate-400 lg:text-2xl text-xl">
+    {data.description}
+  </p>
+
+  <!-- projects -->
+  <CazhService />
+  <Yuhdolan />
+</section>
