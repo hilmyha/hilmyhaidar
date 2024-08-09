@@ -79,17 +79,17 @@ const data = {
     {data.features.map((feature) => <li>{feature}</li>)}
   </ul>
 
-  <LiveProductionButton name={data.title} link="https://service-old.cazh.id" />
+  <!-- <LiveProductionButton name={data.title} link="https://service-old.cazh.id" /> -->
   <GithubButton name={data.title} repo={data.repo} />
 
   <h4 class="mt-12 lg:text-2xl text-lg text-white font-semibold">
     Featured technology used
   </h4>
 
-  <div class="flex gap-10 lg:mt-12 mt-8">
+  <div class="flex lg:gap-10 gap-5 lg:mt-12 mt-8 flex-wrap">
     {
       data.devicons.map((devicon) => (
-        <img class="lg:h-20 h-16 my-0" src={devicon} />
+        <img class="lg:h-20 h-10 my-0" src={devicon} />
       ))
     }
   </div>

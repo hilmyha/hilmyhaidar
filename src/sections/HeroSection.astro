@@ -1,5 +1,11 @@
 ---
+import { Image } from "astro:assets";
 
+import ProgrammingSvg from "../../public/assets/undraw_programming_re_kg9v.svg";
+
+const Logos = {
+  
+}
 ---
 
 <section
@@ -13,7 +19,7 @@
     </div>
     <p class="lg:mb-12 mb-8 lg:text-6xl text-5xl font-bold text-slate-200">
       im a junior <span
-        class="box-decoration-slice text-nowrap bg-gradient-to-r from-slate-800 to-teal-500 text-white"
+        class="box-decoration-slice lg:text-nowrap bg-gradient-to-r from-slate-800 to-teal-500 text-white"
         >web developer.</span
       ><span class="md:block hidden"
         >who loves to build websites and web applications.</span
@@ -33,6 +39,6 @@
     </p>
   </div>
   <div class="hidden xl:block absolute left-[50%]">
-    <img src="public/assets/undraw_programming_re_kg9v.svg" alt="hero-svg" />
+    <Image src={ProgrammingSvg} format="svg" alt="hero-svg" />
   </div>
 </section>
