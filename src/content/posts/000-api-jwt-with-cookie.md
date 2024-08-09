@@ -6,7 +6,7 @@ date: 2024-03-12
 description: "Sebuah cara untuk membuat API yang menggunakan JSON Web Token (JWT) untuk autentikasi dan menggunakan Cookie untuk menyimpan token"
 slug: api-jwt-with-cookie-laravel
 draft: false
-reference:
+reference: "https://laravel.com/"
 ---
 
 ## Table of Contents
@@ -26,9 +26,9 @@ reference:
 
 <br></br>
 
-# Apa sih API JWT dengan Cookie di Laravel 10?
+[![Laravel](https://img.shields.io/badge/Laravel-10-red?style=for-the-badge&logo=laravel)](https://laravel.com/)
 
----
+# Apa sih API JWT dengan Cookie di Laravel 10?
 
 API JWT dengan Cookie di Laravel 10 adalah sebuah cara untuk membuat API yang menggunakan JSON Web Token (JWT) untuk autentikasi dan menggunakan Cookie untuk menyimpan token. JWT adalah sebuah standar terbuka yang mendefinisikan cara untuk mentransmisikan informasi yang aman antara dua pihak. JWT biasanya digunakan untuk autentikasi dan pertukaran informasi antara aplikasi klien dan server. Dengan menggunakan JWT, kita bisa membuat API yang aman dan efisien.
 
@@ -44,8 +44,6 @@ API JWT dengan Cookie di Laravel 10 memiliki beberapa keuntungan, antara lain:
 <br></br>
 
 # Cara Membuat API JWT dengan Cookie di Laravel 10
-
----
 
 Berikut adalah langkah-langkah untuk membuat API JWT dengan Cookie di Laravel 10:
 

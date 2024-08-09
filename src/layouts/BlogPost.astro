@@ -10,7 +10,10 @@ const { frontmatter } = Astro.props;
     <header
       class="container tracking-[-0.05em] max-w-screen-lg lg:px-20 px-6 pt-12 pb-20"
     >
-      <a href="/posts" class="flex items-center gap-4 text-sm font-light text-slate-100 mb-20">
+      <a
+        href="/posts"
+        class="flex items-center gap-4 text-sm font-light text-slate-100 mb-20"
+      >
         <ion-icon name="chevron-back-outline"></ion-icon>
         <span> Back to posts </span>
       </a>
@@ -30,10 +33,9 @@ const { frontmatter } = Astro.props;
   <!-- posts -->
   <section class="container max-w-screen-lg lg:px-20 px-6 pt-16 pb-48">
     <div
-      class="mt-8 text-base text-slate-700 leading-5 prose-stone prose-a:text-slate-600 hover:prose-a:text-slate-800 prose-p:text-justify prose-img:h-[200px] prose lg:prose-md min-w-full"
+      class="mt-8 text-base text-slate-700 leading-5 prose-slate prose-a:text-slate-600 hover:prose-a:text-slate-800 prose-p:text-justify lg:prose-img:w-full prose-img:w-full prose lg:prose-md min-w-full"
     >
       <slot />
     </div>
   </section>
-  
 </BlogLayout>
