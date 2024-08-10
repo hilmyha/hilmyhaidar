@@ -690,7 +690,7 @@ Dengan demikian, kita sudah berhasil membuat API CRUD sederhana dengan ExpressJS
 
 Anda dapat lebih memahami tentang ExpressJS dan DrizzleORM, kamu bisa membaca dokumentasi resminya di [ExpressJS](https://expressjs.com/) dan [DrizzleORM Postgresql](https://orm.drizzle.team/docs/get-started-postgresql).
 
-Untuk melihat kode lengkapnya, kamu bisa melihatnya di [Repository GitHub]().
+Untuk melihat kode lengkapnya, kamu bisa melihatnya di [Repository GitHub](https://github.com/hilmyha/blog-post-tutorials/tree/master/express-drizzleorm).
 
 Selamat mencoba! Semoga tutorial ini bermanfaat dan membantu kamu dalam belajar membuat API CRUD sederhana dengan ExpressJS dan DrizzleORM. Terima kasih!
 
