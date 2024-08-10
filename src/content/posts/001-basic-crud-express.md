@@ -388,175 +388,175 @@ Setelah berhasil membuat schema dan koneksi ke database, sekarang kita akan memb
 
     Pada file `mahasiswa.controller.ts`, tambahkan kode berikut untuk membuat controller CRUD mahasiswa:
 
-    - Pada bagian header, kita mengimport `dotenv`, `Request`, `Response`, `mahasiswaSchema`, `db`, `eq`, `sql` dan `dotenv.config`.
+    Pada bagian header, kita mengimport `dotenv`, `Request`, `Response`, `mahasiswaSchema`, `db`, `eq`, `sql` dan `dotenv.config`.
 
-      ```typescript
-      import dotenv from "dotenv";
-      import { Request, Response } from "express";
+    ```typescript
+    import dotenv from "dotenv";
+    import { Request, Response } from "express";
 
-      // schema imports
-      import { mahasiswaSchema } from "../db/schema/mahasiswa";
-      import db from "../db/connection";
-      import { eq, sql } from "drizzle-orm";
+    // schema imports
+    import { mahasiswaSchema } from "../db/schema/mahasiswa";
+    import db from "../db/connection";
+    import { eq, sql } from "drizzle-orm";
 
-      dotenv.config();
-      ```
+    dotenv.config();
+    ```
 
-    - Pada bagian `getAllMahasiswa`, kita membuat fungsi untuk mengambil semua data mahasiswa dari database. Dengan menggunakan async await, kita mengambil data mahasiswa dari database dengan menggunakan `db.select().from(mahasiswaSchema).execute()` dari fungsi drizzle-orm.
+    Pada bagian `getAllMahasiswa`, kita membuat fungsi untuk mengambil semua data mahasiswa dari database.
 
-      ```typescript
-      // getMahasiswa allows you to get all mahasiswa data
-      export const getMahasiswa = async (req: Request, res: Response) => {
-        try {
-          const mahasiswas = await db.select().from(mahasiswaSchema).execute();
-          return res.status(200).json({
-            status: "success",
-            data: mahasiswas,
-          });
-        } catch (error: any) {
-          return res.status(500).json({
+    ```typescript
+    // getMahasiswa allows you to get all mahasiswa data
+    export const getMahasiswa = async (req: Request, res: Response) => {
+      try {
+        const mahasiswas = await db.select().from(mahasiswaSchema).execute();
+        return res.status(200).json({
+          status: "success",
+          data: mahasiswas,
+        });
+      } catch (error: any) {
+        return res.status(500).json({
+          status: "error",
+          message: error.message,
+        });
+      }
+    };
+    ```
+
+    Pada bagian `getMahasiswaById`, kita membuat fungsi untuk mengambil data mahasiswa berdasarkan id dari request parameter.
+
+    ```typescript
+    // getMahasiswaById allows you to get mahasiswa data by id
+    export const getMahasiswaById = async (req: Request, res: Response) => {
+      try {
+        const { id } = req.params;
+        const mahasiswa = await db
+          .select()
+          .from(mahasiswaSchema)
+          .where(eq(mahasiswaSchema.id, parseInt(id)))
+          .execute();
+
+        // check if id did not exist
+        if (mahasiswa.length === 0) {
+          return res.status(404).json({
             status: "error",
-            message: error.message,
+            message: "Mahasiswa not found",
           });
         }
-      };
-      ```
 
-    - Pada bagian `getMahasiswaById`, kita membuat fungsi untuk mengambil data mahasiswa berdasarkan id dari request parameter. Dengan menggunakan async await, kita mengambil data mahasiswa dari database dengan menggunakan `db.select().from(mahasiswaSchema).where(eq(mahasiswaSchema.id, parseInt(id))).execute()` dari fungsi drizzle-orm.
+        return res.status(200).json({
+          status: "success",
+          data: mahasiswa,
+        });
+      } catch (error: any) {
+        return res.status(500).json({
+          status: "error",
+          message: error.message,
+        });
+      }
+    };
+    ```
 
-      ```typescript
-      // getMahasiswaById allows you to get mahasiswa data by id
-      export const getMahasiswaById = async (req: Request, res: Response) => {
-        try {
-          const { id } = req.params;
-          const mahasiswa = await db
-            .select()
-            .from(mahasiswaSchema)
-            .where(eq(mahasiswaSchema.id, parseInt(id)))
-            .execute();
+    Pada bagian `createMahasiswa`, kita membuat fungsi untuk menambahkan data mahasiswa ke database.
 
-          // check if id did not exist
-          if (mahasiswa.length === 0) {
-            return res.status(404).json({
-              status: "error",
-              message: "Mahasiswa not found",
-            });
-          }
+    ```typescript
+    // createMahasiswa allows you to create new mahasiswa
+    export const createMahasiswa = async (req: Request, res: Response) => {
+      try {
+        const { nama, nim, jurusan, angkatan } = req.body;
+        await db
+          .insert(mahasiswaSchema)
+          .values({
+            nama,
+            nim,
+            jurusan,
+            angkatan,
+          })
+          .execute();
 
-          return res.status(200).json({
-            status: "success",
-            data: mahasiswa,
-          });
-        } catch (error: any) {
-          return res.status(500).json({
-            status: "error",
-            message: error.message,
-          });
-        }
-      };
-      ```
+        return res.status(201).json({
+          status: "success",
+          message: "Mahasiswa created",
+          data: {
+            nama,
+            nim,
+            jurusan,
+            angkatan,
+          },
+        });
+      } catch (error: any) {
+        return res.status(500).json({
+          status: "error",
+          message: error.message,
+        });
+      }
+    };
+    ```
 
-    - Pada bagian `createMahasiswa`, kita membuat fungsi untuk menambahkan data mahasiswa ke database. Dengan menggunakan async await, kita menambahkan data mahasiswa ke database dengan menggunakan `db.insert(mahasiswaSchema).values({nama, nim, jurusan, angkatan}).execute()` dari fungsi drizzle-orm.
+    Pada bagian `updateMahasiswa`, kita membuat fungsi untuk mengupdate data mahasiswa berdasarkan id dari request parameter.
 
-      ```typescript
-      // createMahasiswa allows you to create new mahasiswa
-      export const createMahasiswa = async (req: Request, res: Response) => {
-        try {
-          const { nama, nim, jurusan, angkatan } = req.body;
-          await db
-            .insert(mahasiswaSchema)
-            .values({
-              nama,
-              nim,
-              jurusan,
-              angkatan,
-            })
-            .execute();
+    ```typescript
+    // updateMahasiswa allows you to update mahasiswa data
+    export const updateMahasiswa = async (req: Request, res: Response) => {
+      try {
+        const { id } = req.params;
+        const { nama, nim, jurusan, angkatan } = req.body;
+        await db
+          .update(mahasiswaSchema)
+          .set({
+            nama,
+            nim,
+            jurusan,
+            angkatan,
 
-          return res.status(201).json({
-            status: "success",
-            message: "Mahasiswa created",
-            data: {
-              nama,
-              nim,
-              jurusan,
-              angkatan,
-            },
-          });
-        } catch (error: any) {
-          return res.status(500).json({
-            status: "error",
-            message: error.message,
-          });
-        }
-      };
-      ```
+            // update updated_at field
+            updated_at: sql`now()`,
+          })
+          .where(eq(mahasiswaSchema.id, parseInt(id)))
+          .execute();
 
-    - Pada bagian `updateMahasiswa`, kita membuat fungsi untuk mengupdate data mahasiswa berdasarkan id dari request parameter. Dengan menggunakan async await, kita mengupdate data mahasiswa ke database dengan menggunakan `db.update(mahasiswaSchema).set({nama, nim, jurusan, angkatan}).where(eq(mahasiswaSchema.id, parseInt(id))).execute()` dari fungsi drizzle-orm.
+        return res.status(200).json({
+          status: "success",
+          message: "Mahasiswa updated successfully",
+          data: {
+            nama,
+            nim,
+            jurusan,
+            angkatan,
+          },
+        });
+      } catch (error: any) {
+        return res.status(500).json({
+          status: "error",
+          message: error.message,
+        });
+      }
+    };
+    ```
 
-      ```typescript
-      // updateMahasiswa allows you to update mahasiswa data
-      export const updateMahasiswa = async (req: Request, res: Response) => {
-        try {
-          const { id } = req.params;
-          const { nama, nim, jurusan, angkatan } = req.body;
-          await db
-            .update(mahasiswaSchema)
-            .set({
-              nama,
-              nim,
-              jurusan,
-              angkatan,
+    Pada bagian `deleteMahasiswa`, kita membuat fungsi untuk menghapus data mahasiswa berdasarkan id dari request parameter.
 
-              // update updated_at field
-              updated_at: sql`now()`,
-            })
-            .where(eq(mahasiswaSchema.id, parseInt(id)))
-            .execute();
+    ```typescript
+    // deleteMahasiswa allows you to delete mahasiswa data
+    export const deleteMahasiswa = async (req: Request, res: Response) => {
+      try {
+        const { id } = req.params;
+        await db
+          .delete(mahasiswaSchema)
+          .where(eq(mahasiswaSchema.id, parseInt(id)))
+          .execute();
 
-          return res.status(200).json({
-            status: "success",
-            message: "Mahasiswa updated successfully",
-            data: {
-              nama,
-              nim,
-              jurusan,
-              angkatan,
-            },
-          });
-        } catch (error: any) {
-          return res.status(500).json({
-            status: "error",
-            message: error.message,
-          });
-        }
-      };
-      ```
-
-    - Pada bagian `deleteMahasiswa`, kita membuat fungsi untuk menghapus data mahasiswa berdasarkan id dari request parameter. Dengan menggunakan async await, kita menghapus data mahasiswa dari database dengan menggunakan `db.delete(mahasiswaSchema).where(eq(mahasiswaSchema.id, parseInt(id))).execute()` dari fungsi drizzle-orm.
-
-      ```typescript
-      // deleteMahasiswa allows you to delete mahasiswa data
-      export const deleteMahasiswa = async (req: Request, res: Response) => {
-        try {
-          const { id } = req.params;
-          await db
-            .delete(mahasiswaSchema)
-            .where(eq(mahasiswaSchema.id, parseInt(id)))
-            .execute();
-
-          return res.status(200).json({
-            status: "success",
-            message: "Mahasiswa deleted successfully",
-          });
-        } catch (error: any) {
-          return res.status(500).json({
-            status: "error",
-            message: error.message,
-          });
-        }
-      };
-      ```
+        return res.status(200).json({
+          status: "success",
+          message: "Mahasiswa deleted successfully",
+        });
+      } catch (error: any) {
+        return res.status(500).json({
+          status: "error",
+          message: error.message,
+        });
+      }
+    };
+    ```
 
 3.  Buat file `mahasiswa.route.ts` di dalam folder `routes`:
 
@@ -566,34 +566,34 @@ Setelah berhasil membuat schema dan koneksi ke database, sekarang kita akan memb
 
     Pada file `mahasiswa.route.ts`, tambahkan kode berikut untuk membuat route CRUD mahasiswa:
 
-    - Pada bagian header, kita mengimport `Router`, `getMahasiswa`, `getMahasiswaById`, `createMahasiswa`, `updateMahasiswa`, dan `deleteMahasiswa` dari file `mahasiswa.controller`.
+    Pada bagian header, kita mengimport `Router`, `getMahasiswa`, `getMahasiswaById`, `createMahasiswa`, `updateMahasiswa`, dan `deleteMahasiswa` dari file `mahasiswa.controller`.
 
-      ```typescript
-      import { Router } from "express";
-      import {
-        getMahasiswa,
-        getMahasiswaById,
-        createMahasiswa,
-        updateMahasiswa,
-        deleteMahasiswa,
-      } from "../controllers/mahasiswa.controller";
-      ```
+    ```typescript
+    import { Router } from "express";
+    import {
+      getMahasiswa,
+      getMahasiswaById,
+      createMahasiswa,
+      updateMahasiswa,
+      deleteMahasiswa,
+    } from "../controllers/mahasiswa.controller";
+    ```
 
-    - Pada bagian selanjutnya, kita membuat route untuk CRUD mahasiswa dengan menggunakan `Router()` dari ExpressJS.
+    Pada bagian selanjutnya, kita membuat route untuk CRUD mahasiswa dengan menggunakan `Router()` dari ExpressJS.
 
-      Fungsi `get` digunakan untuk mengambil data, `post` digunakan untuk menambahkan data, `put` digunakan untuk mengupdate data, dan `delete` digunakan untuk menghapus data.
+    Fungsi `get` digunakan untuk mengambil data, `post` digunakan untuk menambahkan data, `put` digunakan untuk mengupdate data, dan `delete` digunakan untuk menghapus data.
 
-      ```typescript
-      const router = Router();
+    ```typescript
+    const router = Router();
 
-      router.get("/mahasiswas", getMahasiswa);
-      router.get("/mahasiswa/:id", getMahasiswaById);
-      router.post("/mahasiswa", createMahasiswa);
-      router.put("/mahasiswa/:id", updateMahasiswa);
-      router.delete("/mahasiswa/:id", deleteMahasiswa);
+    router.get("/mahasiswas", getMahasiswa);
+    router.get("/mahasiswa/:id", getMahasiswaById);
+    router.post("/mahasiswa", createMahasiswa);
+    router.put("/mahasiswa/:id", updateMahasiswa);
+    router.delete("/mahasiswa/:id", deleteMahasiswa);
 
-      export default router;
-      ```
+    export default router;
+    ```
 
 4.  Tambahkan route import pada file `index.ts`:
 
@@ -676,7 +676,6 @@ Berikut adalah contoh penggunaan REST Client untuk menguji API CRUD mahasiswa:
 
     ![Update](../posts/assets/updatedata.png)
 
-
 5.  Menghapus data mahasiswa berdasarkan id:
 
     ```http
@@ -684,7 +683,6 @@ Berikut adalah contoh penggunaan REST Client untuk menguji API CRUD mahasiswa:
     ```
 
     Jika berhasil, maka kamu akan mendapatkan pesan `Mahasiswa deleted successfully`.
-
 
 ## Kesimpulan
 
