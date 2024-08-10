@@ -27,7 +27,7 @@ const fetchOtherPosts = async () => {
 
   return posts
     .filter((post) => {
-      const postTitle = post.data.title; 
+      const postTitle = post.data.title;
       return postTitle !== currentPostTitle;
     })
     .slice(0, 2);
@@ -121,22 +121,21 @@ const otherPosts = await fetchOtherPosts();
   </section>
 
   <!-- back to top button -->
-  <a
-    href="#"
-    class="fixed bottom-6 right-6 p-4 rounded-full bg-slate-500 text-white shadow-xl"
-  >
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      fill="none"
-      viewBox="0 0 24 24"
-      stroke-width="1.5"
-      stroke="currentColor"
-      class="size-6"
-    >
-      <path
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        d="m4.5 15.75 7.5-7.5 7.5 7.5"></path>
-    </svg>
+  <a href="#" class="container fixed flex justify-end bottom-6 right-6">
+    <div class="rounded-full w-fit bg-slate-500 text-white shadow-xl p-4">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke-width="1.5"
+        stroke="currentColor"
+        class="size-6"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="m4.5 15.75 7.5-7.5 7.5 7.5"></path>
+      </svg>
+    </div>
   </a>
 </BlogLayout>
