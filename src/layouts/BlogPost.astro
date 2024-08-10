@@ -2,10 +2,8 @@
 import BlogLayout from "./BlogLayout.astro";
 import RelatedPostList from "../components/RelatedPostList.astro";
 
-import { getEntry } from "astro:content";
+import { getEntry, getCollection } from "astro:content";
 const { frontmatter } = Astro.props;
-
-console.log(frontmatter);
 
 // Fetch full data for related posts
 const fetchRelatedPosts = async () => {
@@ -19,6 +17,23 @@ const fetchRelatedPosts = async () => {
 };
 
 const relatedPosts = await fetchRelatedPosts();
+
+// Fetch other posts that are not related
+const fetchOtherPosts = async () => {
+  const posts = await getCollection("posts");
+
+  // Gunakan frontmatter.id jika tersedia, atau gunakan slug sebagai fallback
+  const currentPostTitle = frontmatter.title;
+
+  return posts
+    .filter((post) => {
+      const postTitle = post.data.title; 
+      return postTitle !== currentPostTitle;
+    })
+    .slice(0, 2);
+};
+
+const otherPosts = await fetchOtherPosts();
 ---
 
 <BlogLayout title=`${frontmatter.title} | Whodareuu`>
@@ -59,14 +74,14 @@ const relatedPosts = await fetchRelatedPosts();
   <!-- posts -->
   <section class="container max-w-screen-lg lg:px-20 px-6 pt-16 pb-16">
     <div
-      class="mt-8 text-base font-[350] text-slate-700 leading-5 prose-slate prose-a:text-slate-600 hover:prose-a:text-slate-800 prose-p:text-justify lg:prose-img:w-full prose-img:w-full prose lg:prose-md min-w-full"
+      class="mt-8 text-base font-[350] text-slate-700 leading-5 prose-slate prose-a:text-slate-600 hover:prose-a:text-slate-800 prose-p:text-justify sm:prose-img:w-[420px] prose-img:w-full prose lg:prose-md min-w-full"
     >
       <slot />
     </div>
   </section>
 
   <!-- related post -->
-  <section class="container max-w-screen-lg lg:px-20 px-6 pt-16 pb-48">
+  <section class="container max-w-screen-lg lg:px-20 px-6 pt-16 pb-12">
     <h2 class="lg:mb-6 mb-3 text-xl font-semibold text-slate-700">
       Related Posts
     </h2>
@@ -80,6 +95,26 @@ const relatedPosts = await fetchRelatedPosts();
       ) : (
         <p class="text-base font-light text-slate-500">
           No related posts available.
+        </p>
+      )
+    }
+  </section>
+
+  <!-- other posts -->
+  <section class="container max-w-screen-lg lg:px-20 px-6 pt-16 pb-48">
+    <h2 class="lg:mb-6 mb-3 text-xl font-semibold text-slate-700">
+      Other Posts
+    </h2>
+    {
+      otherPosts.length > 0 ? (
+        <div class="grid lg:grid-cols-2 gap-6 mt-1">
+          {otherPosts.map((post: any) => (
+            <RelatedPostList post={post} />
+          ))}
+        </div>
+      ) : (
+        <p class="text-base font-light text-slate-500">
+          No other posts available.
         </p>
       )
     }
