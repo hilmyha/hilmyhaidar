@@ -6,7 +6,9 @@ date: 2024-03-12
 description: "Sebuah cara untuk membuat API yang menggunakan JSON Web Token (JWT) untuk autentikasi dan menggunakan Cookie untuk menyimpan token"
 slug: api-jwt-with-cookie-laravel
 draft: false
+tags: ["laravel", "sanctum", "jwt", "cookie"]
 reference: "https://laravel.com/"
+relatedPosts: []
 ---
 
 ## Table of Contents

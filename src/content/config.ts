@@ -11,6 +11,7 @@ export const collections = {
       author: reference("teams"),
       draft: z.boolean(),
       relatedPosts: z.array(reference("posts")).optional(),
+      tags: z.array(z.string()).optional(),
     }),
   }),
   author: defineCollection({

@@ -1,0 +1,21 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+import NotFoundSvg from "../../public/assets/undraw_startled_-8-p0r.svg";
+import { Image } from "astro:assets";
+---
+
+<BaseLayout>
+  <div
+    class="min-h-screen max-w-screen-xl container flex flex-col items-center justify-center"
+  >
+    <Image src={NotFoundSvg} class="w-[500px] lg:w-[300px]" format="svg" alt="404-svg" />
+    <!-- <h1 class="text-white text-6xl font-bold">404⛑️</h1> -->
+    <p class="text-slate-300 text-xl mt-12">
+      Woops! The page you're looking for doesn't exist.
+    </p>
+    <a class="mt-6 text-slate-300 hover:text-slate-400 hover:underline" href="/"
+      >&larr; back to home</a
+    >
+  </div>
+</BaseLayout>

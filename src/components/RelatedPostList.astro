@@ -1,0 +1,30 @@
+---
+import { getEntry, type CollectionEntry } from "astro:content";
+
+type Props = {
+  post: CollectionEntry<"posts">;
+};
+
+const { post } = Astro.props;
+const { author, title, category, date, description } = post.data;
+
+const authorData = author ? await getEntry("teams", author.id) : null;
+---
+
+<a href={`/posts/${post.slug}`} class="p-6 bg-gradient-to-br from-slate-200 to-transparent">
+  <div>
+    <p
+      class="bg-slate-700/80 rounded-sm font-normal text-slate-100 capitalize text-xs px-2 py-1 w-fit"
+    >
+      {category}
+    </p>
+    <h2 class="mt-4 font-medium text-lg tracking-tight text-slate-800">
+      {title}
+    </h2>
+    <p class="mt-1 font-light text-sm lg:block hidden tracking-tight w-3/4">
+      {description.split(" ").slice(0, 5).join(" ")}... <span
+        class="text-slate-400">Read more</span
+      >
+    </p>
+  </div>
+</a>

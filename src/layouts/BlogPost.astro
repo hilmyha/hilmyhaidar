@@ -1,11 +1,28 @@
 ---
 import BlogLayout from "./BlogLayout.astro";
+import RelatedPostList from "../components/RelatedPostList.astro";
 
+import { getEntry } from "astro:content";
 const { frontmatter } = Astro.props;
+
+console.log(frontmatter);
+
+// Fetch full data for related posts
+const fetchRelatedPosts = async () => {
+  const postsPromises = frontmatter.relatedPosts.map(async (related: any) => {
+    const post = await getEntry(related.collection, related.slug);
+    return post;
+  });
+
+  const posts = await Promise.all(postsPromises);
+  return posts.filter((post) => post.data.draft !== true);
+};
+
+const relatedPosts = await fetchRelatedPosts();
 ---
 
 <BlogLayout title=`${frontmatter.title} | Whodareuu`>
-  <div class="bg-slate-500">
+  <div class="bg-gradient-to-br from-slate-500 to-slate-700">
     <!-- header -->
     <header
       class="container tracking-[-0.05em] max-w-screen-lg lg:px-20 px-6 pt-12 pb-20"
@@ -17,6 +34,15 @@ const { frontmatter } = Astro.props;
         <ion-icon name="chevron-back-outline"></ion-icon>
         <span> Back to posts </span>
       </a>
+      <p class="mb-2 text-base font-light text-slate-200 w-2/3">
+        {
+          frontmatter.tags.map((tag: any) => (
+            <span class="mr-2 bg-slate-700/80 rounded-sm font-normal text-slate-100 capitalize text-xs px-2 py-1 w-fit">
+              #{tag}
+            </span>
+          ))
+        }
+      </p>
       <h1 class="mb-1 lg:text-4xl text-3xl font-medium text-white w-2/3">
         {frontmatter.title}
       </h1>
@@ -31,7 +57,7 @@ const { frontmatter } = Astro.props;
     </header>
   </div>
   <!-- posts -->
-  <section class="container max-w-screen-lg lg:px-20 px-6 pt-16 pb-48">
+  <section class="container max-w-screen-lg lg:px-20 px-6 pt-16 pb-16">
     <div
       class="mt-8 text-base font-[350] text-slate-700 leading-5 prose-slate prose-a:text-slate-600 hover:prose-a:text-slate-800 prose-p:text-justify lg:prose-img:w-full prose-img:w-full prose lg:prose-md min-w-full"
     >
@@ -39,13 +65,43 @@ const { frontmatter } = Astro.props;
     </div>
   </section>
 
+  <!-- related post -->
+  <section class="container max-w-screen-lg lg:px-20 px-6 pt-16 pb-48">
+    <h2 class="lg:mb-6 mb-3 text-xl font-semibold text-slate-700">
+      Related Posts
+    </h2>
+    {
+      relatedPosts.length > 0 ? (
+        <div class="grid lg:grid-cols-2 gap-6 mt-1">
+          {relatedPosts.map((post: any) => (
+            <RelatedPostList post={post} />
+          ))}
+        </div>
+      ) : (
+        <p class="text-base font-light text-slate-500">
+          No related posts available.
+        </p>
+      )
+    }
+  </section>
+
   <!-- back to top button -->
   <a
     href="#"
     class="fixed bottom-6 right-6 p-4 rounded-full bg-slate-500 text-white shadow-xl"
   >
-    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-      <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 15.75 7.5-7.5 7.5 7.5" />
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke-width="1.5"
+      stroke="currentColor"
+      class="size-6"
+    >
+      <path
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        d="m4.5 15.75 7.5-7.5 7.5 7.5"></path>
     </svg>
   </a>
 </BlogLayout>

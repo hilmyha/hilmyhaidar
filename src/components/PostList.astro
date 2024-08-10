@@ -7,6 +7,8 @@ type Props = {
 
 const { post } = Astro.props;
 const { author, title, category, date, description } = post.data;
+
+const authorData = author ? await getEntry("teams", author.id) : null;
 ---
 
 <a
@@ -14,25 +16,44 @@ const { author, title, category, date, description } = post.data;
   class="border-t border-slate-600 py-6 flex justify-between"
 >
   <div>
-    <p class="bg-slate-700/80 rounded-sm font-normal text-slate-100 capitalize text-xs px-2 py-1 w-fit">
+    <p
+      class="bg-slate-700/80 rounded-sm font-normal text-slate-100 capitalize text-xs px-2 py-1 w-fit"
+    >
       {category}
     </p>
-    <h2 class="mt-4 font-medium lg:text-xl text-lg tracking-tight text-slate-800">
+    <h2
+      class="mt-4 font-medium lg:text-xl text-lg tracking-tight text-slate-800"
+    >
       {title}
     </h2>
+    <p>
+      {
+        authorData && (
+          <span class="text-slate-400 font-light text-sm">
+            By {authorData.data.name}
+          </span>
+        )
+      }
+    </p>
     <p class="mt-1 font-light text-sm lg:block hidden tracking-tight w-3/4">
-      {description.split(" ").slice(0, 15).join(" ")}... <span class="text-slate-400">Read more</span>
+      {description.split(" ").slice(0, 15).join(" ")}... <span
+        class="text-slate-400">Read more</span
+      >
     </p>
     <p class="mt-1 lg:hidden font-light text-sm block tracking-tight w-3/4">
-      {description.split(" ").slice(0, 5).join(" ")}... <span class="text-slate-400">Read more</span>
+      {description.split(" ").slice(0, 5).join(" ")}... <span
+        class="text-slate-400">Read more</span
+      >
     </p>
   </div>
   <div>
     <p class="text-slate-400 font-light text-sm text-nowrap">
-      {date.toLocaleDateString(undefined, {
-        dateStyle: "medium",
-        timeZone: "UTC",
-      })}
+      {
+        date.toLocaleDateString(undefined, {
+          dateStyle: "medium",
+          timeZone: "UTC",
+        })
+      }
     </p>
   </div>
 </a>
