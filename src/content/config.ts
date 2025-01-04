@@ -4,9 +4,9 @@ export const collections = {
   posts: defineCollection({
     type: "content", // v2.5.0 and later
     schema: z.object({
-      title: z.string().max(60, { message: "Title is too long" }),
+      title: z.string().max(255, { message: "Title is too long" }),
       category: z.string(),
-      description: z.string().max(200, { message: "Description is too long" }),
+      description: z.string().max(255, { message: "Description is too long" }),
       date: z.date(),
       author: reference("teams"),
       draft: z.boolean(),
