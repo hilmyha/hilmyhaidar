@@ -8,6 +8,15 @@ interface HeadProps {
   type: string;
   image: string;
 }
+
+const script = `
+  window.dataLayer = window.dataLayer || [];
+  function gtag() {
+    dataLayer.push(arguments);
+  }
+  gtag("js", new Date());
+  gtag("config", "G-8YVZM9KHQM");
+`;
 ---
 
 <head>
@@ -24,10 +33,24 @@ interface HeadProps {
     }}
   />
   <meta charset="utf-8" />
-  <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+  <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content={description} />
   <meta name="generator" content={Astro.generator} />
+
+  <!-- Google tag (gtag.js) -->
+  <script
+    type="text/partytown"
+    async
+    src={`https://www.googletagmanager.com/gtag/js?id=G-8YVZM9KHQM`}></script>
+  <script type="text/partytown">
+    window.dataLayer = window.dataLayer || [];
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+    gtag("js", new Date());
+    gtag("config", "G-8YVZM9KHQM");
+  </script>
 
   <link rel="preconnect" href="https://fonts.bunny.net" />
   <link
